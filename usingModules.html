@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <link href="style.css" rel="stylesheet" />
+ 
+  <script>
+
+  (function(){
+	
+
+	var app = angular.module("githubViewer", []);
+    var MyController = function($scope, $http) {
+
+		var onUserComplete = function(response){
+			$scope.user = response.data;
+		};
+		
+		var onError = function(reason){
+			$scope.error = "Could not fetch the user";
+		};
+		$http.get("https://api.github.com/users/mikewaniewski")
+			.then(onUserComplete, onError);
+
+		$scope.username = "angular";
+		$scope.message = "Github Viewer ";
+		 
+    };
+
+	app.controller("MyController", MyController);
+
+  }());
+  </script>
+</head>
+
+<body ng-app="githubViewer"  ng-controller="MyController">
+  <h1>Angular Module usage</h1>
+  {{message}}
+
+<br /><br />
+<h2>{{user.login}}  </h2><br />
+<img src="{{user.avatar_url}}" />
+
+<h2>{{error}}</h2>
+
+<br /><br />
+{{username}}
+<form name="searchUser">
+	<input type="search" placeholder="Username to find" ng-model="username" />
+	<input type="submit" value="Search" ng-click="search(username)" >
+
+</form>
+
+</body>
+
+</html>

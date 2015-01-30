@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <link href="style.css" rel="stylesheet" />
+ 
+  <script>
+    var MyController = function($scope, $http) {
+
+
+		var onUserComplete = function(response){
+			$scope.user = response.data;
+		};
+		
+		var onError = function(reason){
+			$scope.error = "Could not fetch the user";
+		};
+		$http.get("https://api.github.com/users/mikewaniewski")
+			.then(onUserComplete, onError);
+		$scope.message = "I'm controller!";
+		 
+    };
+  </script>
+</head>
+
+<body ng-app  ng-controller="MyController">
+  <h1>Angular HTTP.GET usage</h1>
+  {{message}}
+
+<br /><br />
+<h2>{{user.login}}  </h2><br />
+<img src="{{user.avatar_url}}" />
+
+<h2>{{error}}</h2>
+
+</body>
+
+</html>

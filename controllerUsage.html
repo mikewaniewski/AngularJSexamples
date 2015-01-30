@@ -4,17 +4,30 @@
 <head>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
   <link href="style.css" rel="stylesheet" />
-  <script src="script.js"></script>
+ 
   <script>
     var MyController = function($scope) {
-      $scope.message = "I'm controller!";
+		
+
+		var person = {
+			firstName: "Mike",
+			lastName: "W",
+			imageSrc: "https://media.licdn.com/mpr/mpr/shrink_200_200/p/5/005/0aa/2d9/1bb766e.jpg"
+		};
+		$scope.message = "I'm controller!";
+		$scope.person = person;
     };
   </script>
 </head>
 
 <body ng-app  ng-controller="MyController">
-  <h1>Hello Plunker!</h1>
+  <h1>Angular JS Controller Example</h1>
   {{message}}
+
+<br /><br />
+<h2>{{person.firstName}} {{person.lastName}}</h2><br />
+<img src="{{person.imageSrc}}" />
+
 </body>
 
 </html>
